@@ -10,6 +10,7 @@ namespace API.Data{
 
 
         public DbSet<Schedhule> Schedhules {get; set;}
+         public DbSet<UserRole> UserRoles {get; set;}
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

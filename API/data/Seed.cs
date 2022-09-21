@@ -5,7 +5,7 @@ namespace API.Data
 {
     public class Seed
     {
-        public static async Task  SeedData(DataContext context, UserManager<User> userManager){
+        public static async Task  SeedData(DataContext context, UserManager<User> userManager, RoleManager<UserRole> roleManager){
              if (!userManager.Users.Any())
             {
                 var users = new List<User>
@@ -50,6 +50,65 @@ namespace API.Data
                 {
                     await userManager.CreateAsync(user, "Pa$$w0rd");
                 }
+        }
+
+     
+        if (!roleManager.Roles.Any()){
+
+            var roles = new List<UserRole>{
+                new UserRole {
+                    Name = "Manager",
+                    NormalizedName= "MANAGER"
+                },
+                 new UserRole {
+                    Name = "Duty Manager",
+                    NormalizedName= "DUTY MANAGER"
+                },
+                 new UserRole {
+                    Name = "Front Staff",
+                    NormalizedName= "FRONT STAFF"
+                },
+            };
+
+            foreach (var role in roles){
+             await  roleManager.CreateAsync(role);
+            }
+         
+        }
+
+
+
+
+        if (!context.Schedhules.Any()){
+
+            var user = await userManager.FindByEmailAsync("bob@test.com");
+
+            var schedhules = new List<Schedhule>{
+                new Schedhule{
+                    Date = DateTime.Now.AddDays(5),
+                    Start = DateTime.Now.AddDays(5).AddHours(12).AddMinutes(30),
+                    Finish = DateTime.Now.AddDays(5).AddHours(22).AddMinutes(30),
+                    UserID = user.Id,
+                },
+
+                  new Schedhule{
+                    Date = DateTime.Now.AddDays(6),
+                    Start = DateTime.Now.AddDays(6).AddHours(12).AddMinutes(30),
+                    Finish = DateTime.Now.AddDays(6).AddHours(22).AddMinutes(30),
+                    UserID = user.Id,
+                },
+                  new Schedhule{
+                    Date = DateTime.Now.AddDays(7),
+                    Start = DateTime.Now.AddDays(7).AddHours(12).AddMinutes(30),
+                    Finish = DateTime.Now.AddDays(7).AddHours(22).AddMinutes(30),
+                    UserID = user.Id,
+                },
+            };
+
+            foreach( var Schedhule in schedhules){
+                context.Schedhules.Add(Schedhule);
+            }
+           await context.SaveChangesAsync();
         }
      }
     }

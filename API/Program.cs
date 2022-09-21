@@ -25,7 +25,8 @@ builder.Services.AddIdentity<User, UserRole>(options =>{
     options.SignIn.RequireConfirmedAccount = false;
 })
 .AddEntityFrameworkStores<DataContext>()
-.AddSignInManager<SignInManager<User>>();
+.AddSignInManager<SignInManager<User>>()
+.AddRoleManager<RoleManager<UserRole>>();
 
 var app = builder.Build();
 
@@ -39,8 +40,9 @@ try
 
     var context =services.GetRequiredService<DataContext>();
     var userManager = services.GetRequiredService<UserManager<User>>();
+    var roleManager = services.GetRequiredService<RoleManager<UserRole>>();
     await context.Database.MigrateAsync();
-    await Seed.SeedData(context, userManager);
+    await Seed.SeedData(context, userManager, roleManager);
     
 }
 catch (Exception ex)
