@@ -6,6 +6,32 @@ namespace API.Data
     public class Seed
     {
         public static async Task  SeedData(DataContext context, UserManager<User> userManager, RoleManager<UserRole> roleManager){
+
+            
+        if (!roleManager.Roles.Any()){
+
+            var roles = new List<UserRole>{
+                new UserRole {
+                    Name = "Manager",
+                    NormalizedName= "MANAGER"
+                },
+                 new UserRole {
+                    Name = "Duty Manager",
+                    NormalizedName= "DUTY MANAGER"
+                },
+                 new UserRole {
+                    Name = "Front Staff",
+                    NormalizedName= "FRONT STAFF"
+                },
+            };
+
+            foreach (var role in roles){
+             await  roleManager.CreateAsync(role);
+            }
+         
+        }
+
+
              if (!userManager.Users.Any())
             {
                 var users = new List<User>
@@ -49,32 +75,13 @@ namespace API.Data
                 foreach (var user in users)
                 {
                     await userManager.CreateAsync(user, "Pa$$w0rd");
+                    await userManager.AddToRoleAsync(user,"Front Staff");
                 }
         }
 
      
-        if (!roleManager.Roles.Any()){
 
-            var roles = new List<UserRole>{
-                new UserRole {
-                    Name = "Manager",
-                    NormalizedName= "MANAGER"
-                },
-                 new UserRole {
-                    Name = "Duty Manager",
-                    NormalizedName= "DUTY MANAGER"
-                },
-                 new UserRole {
-                    Name = "Front Staff",
-                    NormalizedName= "FRONT STAFF"
-                },
-            };
-
-            foreach (var role in roles){
-             await  roleManager.CreateAsync(role);
-            }
-         
-        }
+        
 
 
 
