@@ -45,7 +45,7 @@ namespace API.Data
                         Address= "26 Te Taou Crescent, Auckland Central, 1010, Auckland, New Zealand",
                         UserName = "bob",
                         Email = "bob@test.com",
-                       // EmailConfirmed = true,
+                        EmailConfirmed = true,
                         
                     },
                     new User
@@ -56,7 +56,7 @@ namespace API.Data
                         Address= "26 Te Taou Crescent, Auckland Central, 1010, Auckland, New Zealand",
                         UserName = "jane",
                         Email = "jane@test.com",
-                         // EmailConfirmed = true,
+                         EmailConfirmed = true,
                     },
                     new User
                     {
@@ -67,7 +67,7 @@ namespace API.Data
                         Address= "26 Te Taou Crescent, Auckland Central, 1010, Auckland, New Zealand",
                         UserName = "tom",
                         Email = "tom@test.com",
-                         // EmailConfirmed = true,
+                         EmailConfirmed = true,
                         
                     },
                 };

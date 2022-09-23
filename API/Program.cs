@@ -1,5 +1,6 @@
 using API.Data;
 using API.models;
+using API.services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,6 +28,9 @@ builder.Services.AddIdentity<User, UserRole>(options =>{
 .AddEntityFrameworkStores<DataContext>()
 .AddSignInManager<SignInManager<User>>()
 .AddRoleManager<RoleManager<UserRole>>();
+
+
+builder.Services.AddScoped<TokenService>();
 
 var app = builder.Build();
 

@@ -12,5 +12,9 @@ namespace API.models{
         public string Address {get; set;} = "";
 
 
+
+        public ICollection<RefreshToken> RefreshTokens {get;set;} = new List<RefreshToken>();
+
+
     }
 }
